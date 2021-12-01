@@ -37,10 +37,12 @@ echo "Installing NPM packages"
 if [ ! -f 'package.json' ]; then
   echo "{}" > package.json
 fi
-
-npm install --save-dev --ignore-scripts @mblabs/eslint-config@latest @mblabs/prettier-config@latest handlebars-helpers
-npm install --save-dev --ignore-scripts @commitlint/config-conventional cz-conventional-changelog
-npm install --save-optional --ignore-scripts chalk inquirer signale string-break
+if [ -f 'package-lock.json' ]; then
+  rm package-lock.json
+fi
+pnpm install --save-dev --ignore-scripts @mblabs/eslint-config@latest @mblabs/prettier-config@latest handlebars-helpers glob
+pnpm install --save-dev --ignore-scripts @commitlint/config-conventional cz-conventional-changelog
+pnpm install --save-optional --ignore-scripts chalk inquirer signale string-break
 
 # @description Re-generate the Taskfile.yml if it has invalid includes
 echo "Ensuring Taskfile is properly configured"
@@ -54,6 +56,7 @@ fi
 rm -rf common-shared
 
 # @description Ensure files from old file structure are removed (temporary code)
+echo "Removing files from old project structures"
 rm -f .ansible-lint
 rm -f .eslintrc.cjs
 rm -f .flake8
@@ -75,9 +78,7 @@ if test -d .config/docs; then
 fi
 
 # @description Ensure pnpm field is populated
-if [ "$(yq e '.vars.NPM_PROGRAM_LOCAL' Taskfile.yml)" == 'null' ]; then
-  yq e -i '.vars.NPM_PROGRAM_LOCAL = npm' Taskfile.yml
-fi
+yq e -i '.vars.NPM_PROGRAM_LOCAL = "pnpm"' Taskfile.yml
 
 # @description Ensure documentation is in appropriate location (temporary code)
 mkdir -p docs
