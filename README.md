@@ -90,6 +90,7 @@
 - [Supported Operating Systems](#supported-operating-systems)
 - [Dependencies](#dependencies)
   - [Galaxy Roles](#galaxy-roles)
+  - [Galaxy Collections](#galaxy-collections)
 - [Example Playbook](#example-playbook)
   - [Real World Example](#real-world-example)
 - [Contributing](#contributing)
@@ -129,7 +130,8 @@ You can also check out **[Install Doctor](https://install.doctor)**. It is an ap
 
 The chart below shows the operating systems that we have tested this role on. It is automatically generated using the Ansible Molecule tests located in the `molecule/` folder. There is CI logic in place to automatically handle the testing of Windows, macOS, Ubuntu, Fedora, CentOS, Debian, and Archlinux. If your operating system is not listed but is a variant of one of the systems we test (i.e. a Debian-flavored system or a RedHat-flavored system) then it is possible that the role will still work.
 
-compatibility_matrix
+| OS Family | OS Version | Status | Idempotent | Tested On |
+| --------- | ---------- | ------ | ---------- | --------- |
 
 **_What does idempotent mean?_** Idempotent means that if you run this role twice in row then there will be no changes to the system the second time around.
 
@@ -155,8 +157,6 @@ Although most of our roles do not have dependencies, there are some cases where 
 The `requirements.yml` file contains a full list of the Ansible Galaxy dependencies required by this role (i.e. `meta/main.yml` role dependencies, helper roles, collections, etc.). For your convenience, a list of the role dependencies along with quick descriptions is below:
 
 role_dependencies
-<<<<<<< HEAD
-=======
 
 ### Galaxy Collections
 
@@ -164,7 +164,6 @@ This role is dependent on multiple Ansible Galaxy collections. The collections a
 
 - <a href="https://galaxy.ansible.com/chocolatey/chocolatey" title="chocolatey.chocolatey collection on Ansible Galaxy" target="_blank"><img alt="chocolatey.chocolatey Ansible Galaxy badge" src="https://img.shields.io/badge/Ansible%20Galaxy-chocolatey.chocolatey-000000?logo=ansible&logoColor=white&style=for-the-badge"></a>
 - <a href="https://galaxy.ansible.com/community/general" title="community.general collection on Ansible Galaxy" target="_blank"><img alt="community.general Ansible Galaxy badge" src="https://img.shields.io/badge/Ansible%20Galaxy-community.general-000000?logo=ansible&logoColor=white&style=for-the-badge"></a>
->>>>>>> c43e96bab6b672c243267442c6d0e60c4bc73597
 
 <a href="#example-playbook" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
