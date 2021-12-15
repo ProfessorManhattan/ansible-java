@@ -71,6 +71,9 @@
   },
   "blueprint": {
     "description": "Installs Java on almost any platform",
+    "github_id": "R_kgDOGdjXFA",
+    "gitlab_group_id": "12261670",
+    "gitlab_project_id": "31712802",
     "group": "ansible",
     "name": "Java",
     "overview": "[Java](https://www.java.com/en/) is a class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.",
@@ -80,10 +83,7 @@
     },
     "slug": "java",
     "subgroup": "role",
-    "title": "Java",
-    "github_id": "R_kgDOGdjXFA",
-    "gitlab_project_id": "31712802",
-    "gitlab_group_id": "12261670"
+    "title": "Java"
   },
   "commitlint": {
     "extends": [
