@@ -38,7 +38,6 @@ galaxy_info:
   galaxy_tags:
     - ansible
     - development
-    - fedora
     - install
     - installdoc
     - installdoctor
@@ -54,6 +53,7 @@ galaxy_info:
     - role
     - system
     - ubuntu
+    - washingtondc
     - web
     - windows
 dependencies:

@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://megabyte.space"
 documentation = "https://megabyte.space/docs/ansible/roles"
-keywords = ["ansible", "ansible-role", "archlinux", "centos", "debian", "development", "doctor", "fedora", "install", "installdoc", "installdoctor", "java", "jdk", "macos", "mblabs", "megabytelabs", "molecule", "openjdk", "oracle", "professormanhattan", "role", "system", "ubuntu", "web", "windows"]
+keywords = ["ansible", "ansible-role", "archlinux", "centos", "debian", "development", "doctor", "fedora", "install", "installdoc", "installdoctor", "java", "jdk", "macos", "mblabs", "megabytelabs", "molecule", "openjdk", "oracle", "professormanhattan", "role", "system", "ubuntu", "washingtondc", "web", "windows"]
 include = ["CHANGELOG.md", "LICENSE"]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -63,6 +63,7 @@ black = "^21.10b0"
 blocklint = "^0.2.3"
 flake8 = "^4.0.1"
 mod-ansible-autodoc = "^0.5.7"
+molecule = "^3.5.2"
 molecule-docker = "^1.1.0"
 molecule-vagrant = "^0.6.3"
 pre-commit-hooks = "^4.0.1"
