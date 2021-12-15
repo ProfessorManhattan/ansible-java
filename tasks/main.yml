@@ -31,6 +31,10 @@
     java_packages: '{{ _java_packages | list }}'
   when: java_packages is not defined
 
+# @action Ensures Java is installed
+# Installs Java on macOS, Linux, and Windows systems
+# @action Ensures Java is installed
+# Ensures Java is added to the `PATH`
 - name: Include tasks based on the operating system
   become: true
   become_method: "{{ 'runas' if ansible_os_family == 'Windows' else 'sudo' }}"

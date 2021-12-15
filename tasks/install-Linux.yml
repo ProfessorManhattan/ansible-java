@@ -1,4 +1,6 @@
 ---
+# @action Ensures Java is installed
+# Ensures the `JAVA_HOME` variable is set
 - name: Set JAVA_HOME (if configured)
   template:
     src: java_home.sh.j2
