@@ -23,4 +23,4 @@ include:
   - remote: https://gitlab.com/megabyte-labs/gitlab-ci/-/raw/master/update/project.gitlab-ci.yml
   - template: Dependency-Scanning.gitlab-ci.yml
   - template: Security/License-Scanning.gitlab-ci.yml
-  - template: 
+  - template: Security/Secret-Detection.gitlab-ci.yml
