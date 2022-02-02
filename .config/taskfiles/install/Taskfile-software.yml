@@ -1,4 +1,3 @@
-# eslint-disable eslint-comments/disable-enable-pair, max-lines
 ---
 version: '3'
 
@@ -9,6 +8,8 @@ tasks:
       - task: brew:formulae
         vars:
           FORMULAE: act
+    status:
+      - type act > /dev/null
 
   allure:
     run: once
@@ -16,28 +17,30 @@ tasks:
       - task: brew:formulae
         vars:
           FORMULAE: allure
+    status:
+      - type allure > /dev/null
 
   brew:
-    deps:
-      - common
     run: once
-    cmds:
-      - task: brew:{{OS}}
-
     log:
       error: Failed to install or load Homebrew
       start: Ensuring Homebrew is installed and available
       success: Successfully ensured Homebrew is installed
-  brew:cask:
-    deps:
-      - brew
-    run: when_changed
     cmds:
-      - brew install --cask {{.CASK}}
+      - task: common
+      - task: brew:{{OS}}
+    status:
+      - type brew > /dev/null
+
+  brew:cask:
+    run: when_changed
     log:
       error: Failed to install `{{.CASK}}`
       start: Ensuring the `{{.CASK}}` Homebrew cask is installed
       success: Successfully installed `{{.CASK}}`
+    cmds:
+      - task: brew
+      - brew install --cask {{.CASK}}
     status:
       - type {{.CASK}} &> /dev/null
 
@@ -59,15 +62,14 @@ tasks:
       - type brew &> /dev/null
 
   brew:formulae:
-    deps:
-      - brew
     run: when_changed
-    cmds:
-      - brew install {{.FORMULAE}}
     log:
       error: Failed to install `{{.FORMULAE}}`
       start: Ensuring the `{{.FORMULAE}}` Homebrew formulae is installed
       success: Successfully installed `{{.FORMULAE}}`
+    cmds:
+      - task: brew
+      - brew install {{.FORMULAE}}
     status:
       - type {{.FORMULAE}} &> /dev/null
 
@@ -93,10 +95,14 @@ tasks:
           fi
         fi
     status:
-      - type brew &> /dev/null || [[ "$OPTIMIZED_IMAGE" == 'true' ]]
+      - type brew &> /dev/null
 
   brew:utils:
     run: once
+    log:
+      error: Failed to setup GNU-compatibility tools
+      start: Installing GNU-compatibility tools for macOS via Homebrew
+      success: Successfully installed GNU-compatibility tools
     cmds:
       - task: compatibility:coreutils
       - task: compatibility:findutils
@@ -104,10 +110,6 @@ tasks:
       - task: compatibility:grep
       - task: compatibility:gnu-tar
       - task: compatibility:gawk
-    log:
-      error: Failed to setup GNU-compatibility tools
-      start: Installing GNU-compatibility tools for macOS via Homebrew
-      success: Successfully installed GNU-compatibility tools
     status:
       - '[ "{{OS}}" != "darwin" ]'
 
@@ -125,13 +127,13 @@ tasks:
 
   common:
     run: once
-    cmds:
-      - task: common:{{OS}}
-
     log:
       error: There was an error ensuring common system tools are present
       start: Ensuring common system tools are present
       success: Ensured common system tools are present
+    cmds:
+      - task: common:{{OS}}
+
   common:darwin:
     cmds:
       - task: common:darwin:xcode
@@ -140,12 +142,12 @@ tasks:
     vars:
       CLT_STATUS:
         sh: brew config | grep CLT
-    cmds:
-      - sudo xcode-select --install
     log:
       error: Failed to run `sudo xcode-select --install`
       start: Running `sudo xcode-select --install` to install macOS developer tools
       success: Successfully ran `sudo xcode-select --install`
+    cmds:
+      - sudo xcode-select --install
     status:
       - '[ "{{.CLT_STATUS}}" != "CLT: N/A" ]'
 
@@ -162,17 +164,21 @@ tasks:
           else
             echo "unknown"
           fi
+    log:
+      error: Failed to ensure basic system dependencies are installed
+      start: Ensuring basic system dependencies are installed
+      success: Basic system dependencies are installed!
     cmds:
       - task: common:linux:{{.LINUX_FAMILY}}
-    status:
-      - '[[ "$OPTIMIZED_IMAGE" == "true" ]]'
 
   common:linux:archlinux:
     interactive: true
     cmds:
       - .config/log warn "Archlinux support for Homebrew is not very well documented.. if this does not work and you can get it working, please open a PR :)"
       - |
+        .config/log info 'Attempting to run `sudo pacman update` (for Homebrew dependencies)'
         sudo pacman update
+        .config/log info 'Attempting to run `sudo pacman -S base-devel curl file git procps-ng` (for Homebrew dependencies)'
         sudo pacman -S base-devel curl file git procps-ng
     status:
       - type curl &> /dev/null
@@ -185,8 +191,9 @@ tasks:
     interactive: true
     cmds:
       - |
-        .config/log info 'Attempting to install Homebrew dependencies (sudo password required)'
+        .config/log info 'Attempting to run `sudo apt-get -y update` (for Homebrew dependencies)'
         sudo apt-get -y update
+        .config/log info 'Attempting to run `sudo apt-get install -y build-essential curl file git procps` (Homebrew dependencies)'
         sudo apt-get install -y build-essential curl file git procps
     status:
       - type curl &> /dev/null
@@ -204,35 +211,38 @@ tasks:
           yum grouplist 'Development Tools' &> "$HOME/.config/bodega/yum-devtools-check-ran"
           DEV_TOOLS_NOT_INSTALLED="$(grep 'No groups match' < "$HOME/.config/bodega/yum-devtools-check-ran" > /dev/null)"
           if [[ "$DEV_TOOLS_NOT_INSTALLED" == '0' ]]; then
+            .config/log info 'Attempting to run `sudo yum groupinstall -y "Development Tools"`'
             sudo yum groupinstall -y 'Development Tools'
           fi
           touch "$HOME/.config/bodega/yum-devtools-check-ran"
         fi
         if ! rpm --quiet --query curl file git procps-ng; then
-          .config/log info 'Attempting to install Homebrew dependencies (sudo password required)'
+          .config/log info 'Attempting to run `sudo yum install -y curl file git procps-ng`'
           sudo yum install -y curl file git procps-ng
         fi
         if [ -f '/etc/os-release' ]; then
           source /etc/os-release
           if [[ "$ID" == 'fedora' ]] && [ "$VERSION_ID" -gt "29" ]; then
             if ! rpm --quiet --query libxcrypt-compat; then
-              .config/log info 'Attempting to install Fedora-specific Homebrew dependency (sudo password required)'
+              .config/log info 'Attempting to run `sudo yum -y install libxcrypt-compat` (Homebrew dependencies)'
               sudo yum -y install libxcrypt-compat
             fi
           fi
         fi
 
   common:linux:unknown:
+    log:
+      start: You are using an operating system that we do not directly support. Please make sure
+        the equivalent of `build-essential`, `curl`, `file`, `git`, and `procps` are installed.
     cmds:
-      - .config/log warn 'You are using an operating system that we do not directly support. Please make sure
-        the equivalent of `build-essential`, `curl`, `file`, `git`, and `procps` are installed.'
+      - .config/log warn "*** Unknown OS -> $OSTYPE ***"
 
   common:windows:
+    log:
+      error: Windows is not supported. Try using a Windows WSL environment.
     cmds:
       - exit 1
 
-    log:
-      error: Windows is not supported. Try using a Windows WSL environment.
   compatibility:findutils:
     cmds:
       - task: brew:formulae
@@ -246,6 +256,8 @@ tasks:
       - task: brew:formulae
         vars:
           FORMULAE: gawk
+    status:
+      - type gawk > /dev/null
 
   compatibility:gnu-sed:
     cmds:
@@ -290,6 +302,8 @@ tasks:
     run: once
     cmds:
       - task: docker:{{OS}}
+    status:
+      - type docker > /dev/null
 
   docker:darwin:
     run: once
@@ -330,6 +344,8 @@ tasks:
       - task: brew:formulae
         vars:
           FORMULAE: exiftool
+    status:
+      - type exiftool > /dev/null
 
   exit:notice:reload:
     cmds:
@@ -355,6 +371,8 @@ tasks:
       - task: brew:cask
         vars:
           CASK: google-cloud-sdk
+    status:
+      - type gcloud > /dev/null
 
   gcloud:linux:
     cmds:
@@ -372,11 +390,15 @@ tasks:
       - task: brew:formulae
         vars:
           FORMULAE: gh
+    status:
+      - type gh > /dev/null
 
   git:
-    deps:
-      - common
     run: once
+    cmds:
+      - task: common
+    status:
+      - type git > /dev/null
 
   gitleaks:
     run: once
@@ -384,6 +406,8 @@ tasks:
       - task: brew:formulae
         vars:
           FORMULAE: gitleaks
+    status:
+      - type gitleaks > /dev/null
 
   glab:
     run: once
@@ -391,6 +415,8 @@ tasks:
       - task: brew:formulae
         vars:
           FORMULAE: glab
+    status:
+      - type glab > /dev/null
 
   go:
     run: once
@@ -398,6 +424,8 @@ tasks:
       - task: brew:formulae
         vars:
           FORMULAE: go
+    status:
+      - type go > /dev/null
 
   grype:
     run: once
@@ -414,6 +442,8 @@ tasks:
       - task: brew:formulae
         vars:
           FORMULAE: jq
+    status:
+      - type jq > /dev/null
 
   node:
     run: once
@@ -421,38 +451,38 @@ tasks:
       - task: brew:formulae
         vars:
           FORMULAE: node
+    status:
+      - type node > /dev/null
 
   pipx:
     run: once
-    cmds:
-      - task: pipx:{{OS}}
     log:
       error: Failed to ensure `pipx` is installed
       start: Ensuring `pipx` is installed
       success: Successfully ensured `pipx` is installed
+    cmds:
+      - task: python
+      - task: pipx:{{OS}}
     status:
       - type pipx > /dev/null
 
   pipx:darwin:
-    deps:
-      - brew
     cmds:
+      - task: brew
       - brew install pipx
       - pipx ensurepath
 
   pipx:linux:
-    deps:
-      - :install:software:python
     cmds:
       - python3 -m pip install --user pipx
       - python3 -m pipx ensurepath
 
   pipx:windows:
+    log:
+      error: These scripts are not currently compatible with Windows. Try using WSL.
     cmds:
       - exit 1
 
-    log:
-      error: These scripts are not currently compatible with Windows. Try using WSL.
   poetry:
     run: once
     cmds:
@@ -476,17 +506,18 @@ tasks:
           FORMULAE: poetry
 
   poetry:windows:
+    log:
+      error: These scripts are not currently compatible with Windows. Try using WSL.
     cmds:
       - exit 1
 
-    log:
-      error: These scripts are not currently compatible with Windows. Try using WSL.
   python:
-    deps:
-      - brew # bug fix
     run: once
     cmds:
+      - task: brew
       - task: python:{{OS}}
+    status:
+      - type python3 > /dev/null
 
   python:darwin:
     run: once
@@ -505,17 +536,28 @@ tasks:
           SOFTWARE: python
 
   python:windows:
+    log:
+      error: These scripts are not currently compatible with Windows. Try using WSL.
     cmds:
       - exit 1
 
-    log:
-      error: These scripts are not currently compatible with Windows. Try using WSL.
   rsync:
     run: once
     cmds:
       - task: brew:formulae
         vars:
           FORMULAE: rsync
+    status:
+      - type rsync &> /dev/null
+
+  snapcraft:
+    run: once
+    cmds:
+      - task: brew:formulae
+        vars:
+          FORMULAE: snapcraft
+    status:
+      - type snapcraft > /dev/null
 
   sshpass:
     run: once
@@ -541,6 +583,8 @@ tasks:
       - task: brew:formulae
         vars:
           FORMULAE: tokei
+    status:
+      - type tokei > /dev/null
 
   trivy:
     run: once
@@ -554,6 +598,8 @@ tasks:
   vagrant:
     cmds:
       - task: vagrant:{{OS}}
+    status:
+      - type vagrant > /dev/null
 
   vagrant:darwin:
     run: once
@@ -617,3 +663,5 @@ tasks:
       - task: brew:formulae
         vars:
           FORMULAE: yq
+    status:
+      - type yq > /dev/null

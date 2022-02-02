@@ -14,7 +14,7 @@
   <a href="https://megabyte.space" title="Megabyte Labs homepage" target="_blank">
     <img alt="Homepage" src="https://img.shields.io/website?down_color=%23FF4136&down_message=Down&label=Homepage&logo=home-assistant&logoColor=white&up_color=%232ECC40&up_message=Up&url=https%3A%2F%2Fmegabyte.space&style=for-the-badge" />
   </a>
-  <a href="https://github.com/ProfessorManhattan/ansible-java/blob/master/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
+  <a href="https://github.com/ProfessorManhattan/ansible-java/blob/master/docs/CONTRIBUTING.md" title="Learn about contributing" target="_blank">
     <img alt="Contributing" src="https://img.shields.io/badge/Contributing-Guide-0074D9?logo=github-sponsors&logoColor=white&style=for-the-badge" />
   </a>
   <a href="https://app.slack.com/client/T01ABCG4NK1/C01NN74H0LW/details/" title="Chat with us on Slack" target="_blank">
@@ -30,13 +30,13 @@
 <br/>
 <div align="center">
   <a title="Ansible Galaxy role: professormanhattan.java" href="https://galaxy.ansible.com/professormanhattan/java" target="_blank">
-    <img alt="Ansible Galaxy role: professormanhattan.java" src="https://img.shields.io/ansible/role/ansible_galaxy_project_id?logo=ansible&style=flat-square" />
+    <img alt="Ansible Galaxy role: professormanhattan.java" src="https://img.shields.io/ansible/role/57261?logo=ansible&style=flat-square" />
   </a>
   <a title="Version: 1.0.1" href="https://github.com/ProfessorManhattan/ansible-java" target="_blank">
     <img alt="Version: 1.0.1" src="https://img.shields.io/badge/version-1.0.1-blue.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAACNJREFUCNdjIACY//+BEp9hhM3hAzYQwoBIAqEDYQrCZLwAAGlFKxU1nF9cAAAAAElFTkSuQmCC&cacheSeconds=2592000&style=flat-square" />
   </a>
   <a title="GitLab build status" href="https://gitlab.com/megabyte-labs/ansible-roles/java/-/commits/master" target="_blank">
-    <img alt="Build status" src="https://img.shields.io/gitlab/pipeline-status/megabyte-labs/ansible-roles/java?branch=master&label=build&logo=gitlab&style=flat-square">
+    <img alt="Build status" src="https://img.shields.io/gitlab/pipeline-status/megabyte-labs/ansible-roles/java?branch=master&label=build&logo=gitlab&logoColor=white&style=flat-square">
   </a>
   <a title="Windows 11 test status on GitHub" href="https://github.com/ProfessorManhattan/ansible-java/actions/workflows/Windows.yml" target="_blank">
     <img alt="Windows 11 test status" src="https://img.shields.io/github/workflow/status/ProfessorManhattan/ansible-java/Windows%20Ansible%20Role%20Test/master?color=cyan&label=windows&logo=windows&style=flat-square">
@@ -48,13 +48,13 @@
     <img alt="Linux Molecule test status" src="https://img.shields.io/gitlab/pipeline-status/megabyte-labs/ansible-roles/java?branch=test%2Flinux&label=linux&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAElBMVEUAAAAwPEEuOEIxOzswPj7///91+pI+AAAABXRSTlMANRkNJejDPNcAAAB+SURBVCjPddHBDYAgDIXhGtMRHMG7S3hvTP79VxFIQVq1wOVLm7wU8QIJpSThC2wGwwJoPQFKRdiAAIhGsAykZNSZAOVNMx4BMjwtpySgr6CDJdB/MAdJwAvSiFoE5aABHUb0ch0WHNQq+KPAOgCgrbEnbjAHArjGz3jr3hpumrQpvwi66rkAAAAASUVORK5CYII=&style=flat-square">
   </a>
   <a title="Ansible Galaxy quality score (out of 5)" href="https://galaxy.ansible.com/professormanhattan/java" target="_blank">
-    <img alt="Ansible Galaxy quality score" src="https://img.shields.io/ansible/quality/ansible_galaxy_project_id?logo=ansible&style=flat-square" />
+    <img alt="Ansible Galaxy quality score" src="https://img.shields.io/ansible/quality/57261?logo=ansible&style=flat-square" />
   </a>
   <a title="Ansible Galaxy download count" href="https://galaxy.ansible.com/professormanhattan/java" target="_blank">
-    <img alt="Ansible Galaxy download count" src="https://img.shields.io/ansible/role/d/ansible_galaxy_project_id?logo=ansible&label=downloads&style=flat-square">
+    <img alt="Ansible Galaxy download count" src="https://img.shields.io/ansible/role/d/57261?logo=ansible&label=downloads&style=flat-square">
   </a>
   <a title="Documentation" href="https://megabyte.space/docs/ansible" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?logo=readthedocs&style=flat-square" />
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?logo=readthedocs&logoColor=white&style=flat-square" />
   </a>
   <a title="License: MIT" href="https://github.com/ProfessorManhattan/ansible-java/blob/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAHpJREFUCNdjYOD/wMDAUP+PgYHxhzwDA/MB5gMM7AwMDxj4GBgKGGQYGCyAEEgbMDDwAAWAwmk8958xpIOI5zKH2RmOyhxmZjguAiKmgIgtQOIYmFgCIp4AlaQ9OczGkJYCJEAGgI0CGwo2HmwR2Eqw5SBnNIAdBHYaAJb6KLM15W/CAAAAAElFTkSuQmCC&style=flat-square" />
@@ -63,8 +63,8 @@
 
 > </br><h4 align="center">**An Ansible role that installs Java on almost any platform**</h4></br>
 
-<!--TERMINALIZE![terminalizer_title](https://gitlab.com/megabyte-labs/ansible-roles/java* **github**: /raw/master/.demo.gif
-* **gitlab**: /-/raw/master/.demo.gif)TERMINALIZE-->
+<!--TERMINALIZE![terminalizer_title](https://gitlab.com/megabyte-labs/ansible-roles/java* **github**: /raw/master/docs/demo.gif
+* **gitlab**: /-/raw/master/docs/demo.gif)TERMINALIZE-->
 
 <a href="#table-of-contents" style="width:100%"><img style="width:100%" src="https://gitlab.com/megabyte-labs/assets/-/raw/master/png/aqua-divider.png" /></a>
 
@@ -95,8 +95,8 @@ This repository is the home of an [Ansible](https://www.ansible.com/) role that 
 
 **Ensures Java is installed:**
 
-- Installs Java using Chocolatey on Windows
 - Ensures the `JAVA_HOME` variable is set
+- Installs Java using Chocolatey on Windows
 - Installs Java on macOS, Linux, and Windows systems
 - Ensures Java is added to the `PATH`
 
@@ -181,7 +181,9 @@ Although most of our roles do not have dependencies, there are some cases where 
 
 The `requirements.yml` file contains a full list of the Ansible Galaxy dependencies required by this role (i.e. `meta/main.yml` role dependencies, helper roles, collections, etc.). For your convenience, a list of the role dependencies along with quick descriptions is below:
 
-role_dependencies
+| Dependency                                                                                                                                                                    | Description                                                                |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| <b><a href="https://galaxy.ansible.com/professormanhattan/homebrew" title="professormanhattan.homebrew on Ansible Galaxy" target="_blank">professormanhattan.homebrew</a></b> | Installs Homebrew (a package management system) on macOS and Linux systems |
 
 ### Galaxy Collections
 
@@ -213,7 +215,7 @@ You can find an example of a playbook that incorporates this role in our main pl
 
 ## Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/ProfessorManhattan/ansible-java/issues). If you would like to contribute, please take a look at the [contributing guide](https://github.com/ProfessorManhattan/ansible-java/blob/master/CONTRIBUTING.md).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/ProfessorManhattan/ansible-java/issues). If you would like to contribute, please take a look at the [contributing guide](https://github.com/ProfessorManhattan/ansible-java/blob/master/docs/CONTRIBUTING.md).
 
 <details>
 <summary><b>Sponsorship</b></summary>
