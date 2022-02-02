@@ -74,6 +74,7 @@
     "access": "public"
   },
   "blueprint": {
+    "ansible_galaxy_project_id": "57261",
     "description": "Installs Java on almost any platform",
     "github_id": "R_kgDOGdjXFA",
     "gitlab_group_id": "",
@@ -87,8 +88,7 @@
     },
     "slug": "java",
     "subgroup": "role",
-    "title": "Java",
-    "ansible_galaxy_project_id": "57261"
+    "title": "Java"
   },
   "changelog": {
     "displayTypes": [

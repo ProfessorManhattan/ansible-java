@@ -95,8 +95,8 @@ This repository is the home of an [Ansible](https://www.ansible.com/) role that 
 
 **Ensures Java is installed:**
 
-- Ensures the `JAVA_HOME` variable is set
 - Installs Java using Chocolatey on Windows
+- Ensures the `JAVA_HOME` variable is set
 - Installs Java on macOS, Linux, and Windows systems
 - Ensures Java is added to the `PATH`
 
