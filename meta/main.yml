@@ -6,7 +6,7 @@ galaxy_info:
   description: Installs Java on almost any platform
   company: Megabyte Labs
   license: license (BSD, MIT)
-  min_ansible_version: 2.1
+  min_ansible_version: 2.10
   platforms:
     - name: EL
       versions:
