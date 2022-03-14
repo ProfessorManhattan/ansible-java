@@ -5,8 +5,9 @@ galaxy_info:
   author: ProfessorManhattan and geerlingguy
   description: Installs Java on almost any platform
   company: Megabyte Labs
+  issue_tracker_url: https://gitlab.com/megabyte-labs/ansible-roles/java/-/issues
   license: license (BSD, MIT)
-  min_ansible_version: 2.10
+  min_ansible_version: 2.1
   platforms:
     - name: EL
       versions:
